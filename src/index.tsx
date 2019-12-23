@@ -2,8 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import Login from "./layouts/Login";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Dashboard from "./layouts/Dashboard";
+import {authenticate} from "./controllers/authentication";
 
-ReactDOM.render(<Login/>, document.getElementById('root'));
+const userItem = window.sessionStorage.getItem("user");
+if (userItem) {
+    authenticate(JSON.parse(userItem));
+}
+
+ReactDOM.render(
+    <BrowserRouter>
+        <Switch>
+            <Route exact path="/" component={Dashboard}/>
+            <Route exact path="/login" component={Login}/>
+        </Switch>
+    </BrowserRouter>
+    , document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -10,9 +10,15 @@ import Col from "../components/Col";
 import Container from "../components/Container";
 import MaterialIcon from "../components/MaterialIcon";
 import Button from "../components/Button";
+import {authenticate, isAuthenticated} from "../controllers/authentication";
+import {Redirect} from "react-router-dom";
 
 class Login extends React.Component {
     render() {
+        if (isAuthenticated()) {
+            return <Redirect to="/"/>
+        }
+
         return (
             <div className="login-bg">
                 <Row>
@@ -68,7 +74,8 @@ class Login extends React.Component {
             const username: string = getInputValue(usernameElement);
             const password: string = getInputValue(passwordElement);
             if (username && password) {
-                alert(`${username}:${password}`);
+                authenticate({username: username, password: password});
+                this.forceUpdate();
             }
         }
     };
