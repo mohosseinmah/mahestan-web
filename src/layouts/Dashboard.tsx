@@ -7,6 +7,7 @@ import "../assets/css/custom.css";
 import {isNotAuthenticated} from "../controllers/authentication";
 import {Redirect} from "react-router-dom";
 import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
 
 class Dashboard extends React.Component {
 
@@ -18,6 +19,7 @@ class Dashboard extends React.Component {
         return (
             <>
                 <Header/>
+                <Sidebar/>
             </>
         );
     }
