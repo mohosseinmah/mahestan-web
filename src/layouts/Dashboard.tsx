@@ -8,6 +8,7 @@ import {isNotAuthenticated} from "../controllers/authentication";
 import {Redirect} from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import Main from "../components/Main";
 
 class Dashboard extends React.Component {
 
@@ -20,6 +21,7 @@ class Dashboard extends React.Component {
             <>
                 <Header/>
                 <Sidebar/>
+                <Main/>
             </>
         );
     }

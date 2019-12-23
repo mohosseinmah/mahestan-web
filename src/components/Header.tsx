@@ -8,7 +8,7 @@ class Header extends React.Component {
         const profileDropdownStyle: CSSProperties = {
             display: "none",
             width: "140px",
-            left: "-10px",
+            left: "0px",
             top: "64px",
             height: "101px",
             transformOrigin: "0px 0px",
@@ -51,7 +51,17 @@ class Header extends React.Component {
         );
     }
 
-    private handleClick = () => {
+    private handleClick = (e: any) => {
+        let targetElement = e.target;
+        while (targetElement.localName !== "li") {
+            targetElement = targetElement.parentElement;
+        }
+        if (targetElement.className === "active") {
+            targetElement.className = "";
+        } else {
+            targetElement.className = "active";
+        }
+
         const profileDropdown = document.getElementById("profile-dropdown");
         if (profileDropdown) {
             if (profileDropdown.style.display === "block") {
