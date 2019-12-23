@@ -1,6 +1,10 @@
 import React from "react";
 
-class MaterialIcon extends React.Component<any, any> {
+interface MaterialIconProps {
+    iconName: string
+}
+
+class MaterialIcon extends React.Component<MaterialIconProps, any> {
 
     render() {
         return <i className="material-icons prefix pt-2">{this.props.iconName}</i>;
