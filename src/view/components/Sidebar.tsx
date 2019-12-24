@@ -11,7 +11,7 @@ class Sidebar extends React.Component {
                     <h1 className="logo-wrapper">
                         <Link className="brand-logo darken-1" to="/">
                             <img className="hide-on-med-and-down"
-                                 src={require("../assets/images/logo/logo.png")} alt="Logo"/>
+                                 src={require("../../assets/images/logo/logo.png")} alt="Logo"/>
                             <span className="logo-text hide-on-med-and-down">مهستان</span>
                         </Link>
                     </h1>

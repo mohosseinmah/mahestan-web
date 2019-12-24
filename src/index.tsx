@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import Login from "./layouts/Login";
+import Login from "./view/layouts/Login";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Dashboard from "./layouts/Dashboard";
-import {authenticate} from "./controllers/authentication";
+import Dashboard from "./view/layouts/Dashboard";
+import {authenticate} from "./controller/authentication";
 
 const userItem = window.sessionStorage.getItem("user");
 if (userItem) {

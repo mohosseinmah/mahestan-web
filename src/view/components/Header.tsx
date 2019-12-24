@@ -1,7 +1,7 @@
 import React, {CSSProperties} from "react";
 import MaterialIcon from "./MaterialIcon";
 import {Link} from "react-router-dom";
-import {logout} from "../controllers/authentication";
+import {logout} from "../../controller/authentication";
 
 class Header extends React.Component {
     render() {
@@ -25,7 +25,7 @@ class Header extends React.Component {
                                     <div onClick={this.handleClick}
                                          className="waves-effect waves-block waves-light profile-button">
                                         <span className="avatar-status avatar-online">
-                                            <img src={require("../assets/images/avatar/user-avatar.png")} alt="avatar"/><i/>
+                                            <img src={require("../../assets/images/avatar/user-avatar.png")} alt="avatar"/><i/>
                                         </span>
                                     </div>
                                     <ul className="dropdown-content" id="profile-dropdown" tabIndex={0}

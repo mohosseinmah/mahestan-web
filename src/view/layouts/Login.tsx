@@ -1,16 +1,16 @@
 import React from "react";
-import "../assets/css/vendors.min.css";
-import "../assets/css/style-rtl.min.css";
-import "../assets/css/materialize.min.css";
-import "../assets/css/style.min.css";
-import "../assets/css/login.css";
-import "../assets/css/custom.css";
+import "../../assets/css/vendors.min.css";
+import "../../assets/css/style-rtl.min.css";
+import "../../assets/css/materialize.min.css";
+import "../../assets/css/style.min.css";
+import "../../assets/css/login.css";
+import "../../assets/css/custom.css";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Container from "../components/Container";
 import MaterialIcon from "../components/MaterialIcon";
 import Button from "../components/Button";
-import {authenticate, isAuthenticated} from "../controllers/authentication";
+import {authenticate, isAuthenticated} from "../../controller/authentication";
 import {Redirect} from "react-router-dom";
 
 class Login extends React.Component {
