@@ -28,9 +28,9 @@ class Sidebar extends React.Component {
                         <span className="navigation-header-text">درس</span>
                     </li>
                     <li className="bold">
-                        <Link className="waves-effect waves-cyan" to="/" tabIndex={0}>
+                        <Link className="waves-effect waves-cyan" to="/stone" tabIndex={0}>
                             <MaterialIcon iconName="settings_input_svideo"/>
-                            <span className="menu-title">لیست دروس</span>
+                            <span className="menu-title">سنگی بر گوری</span>
                         </Link>
                     </li>
                 </ul>

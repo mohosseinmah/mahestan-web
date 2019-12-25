@@ -14,8 +14,8 @@ if (userItem) {
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
-            <Route exact path="/" component={Dashboard}/>
-            <Route exact path="/login" component={Login}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/" component={Dashboard}/>
         </Switch>
     </BrowserRouter>
     , document.getElementById('root')
