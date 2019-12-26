@@ -12,6 +12,7 @@ import MaterialIcon from "../components/MaterialIcon";
 import Button from "../components/Button";
 import {authenticate, isAuthenticated} from "../../controller/authentication";
 import {Redirect} from "react-router-dom";
+import InputField from "../components/InputField";
 
 class Login extends React.Component {
     render() {
@@ -33,15 +34,17 @@ class Login extends React.Component {
                                             </Col>
                                         </Row>
                                         <Row className="margin">
-                                            <Col className="input-field s12">
-                                                <MaterialIcon iconName="person_outline"/>
-                                                <input id="username" type="text" placeholder="نام کاربری"/>
+                                            <Col className="s12">
+                                                <InputField id="username" type="text" label="نام کاربری">
+                                                    <MaterialIcon iconName="person_outline"/>
+                                                </InputField>
                                             </Col>
                                         </Row>
                                         <Row className="margin">
-                                            <Col className="input-field s12">
-                                                <MaterialIcon iconName="lock_outline"/>
-                                                <input id="password" type="password" placeholder="رمز عبور"/>
+                                            <Col className="s12">
+                                                <InputField id="password" type="password" label="رمز عبور">
+                                                    <MaterialIcon iconName="lock_outline"/>
+                                                </InputField>
                                             </Col>
                                         </Row>
                                         <Row>

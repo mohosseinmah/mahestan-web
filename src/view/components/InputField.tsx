@@ -15,6 +15,7 @@ class InputField extends React.Component<InputFieldProps, any> {
         }
         return (
             <div className={className}>
+                {this.props.children}
                 <input id={this.props.id} type={this.props.type} onFocus={this.handleFocus} onBlur={this.handleBlur}/>
                 {this.props.label &&
                 <label id={`${this.props.id}-label`} htmlFor={this.props.id}>{this.props.label}</label>}
