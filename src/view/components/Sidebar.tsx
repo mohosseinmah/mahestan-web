@@ -1,6 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import MaterialIcon from "./MaterialIcon";
+import {sideLinks} from "../../controller/sideLinks";
+import SideLink from "../../model/SideLink";
 
 class Sidebar extends React.Component {
 
@@ -18,21 +20,26 @@ class Sidebar extends React.Component {
                 </div>
                 <ul className="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow ps ps--active-y right-aligned"
                     id="slide-out">
-                    <li className="bold">
-                        <Link className="waves-effect waves-cyan" to="/" tabIndex={0}>
-                            <MaterialIcon iconName="settings_input_svideo"/>
-                            <span className="menu-title">میز کار</span>
-                        </Link>
-                    </li>
-                    <li className="navigation-header">
-                        <span className="navigation-header-text">درس</span>
-                    </li>
-                    <li className="bold">
-                        <Link className="waves-effect waves-cyan" to="/stone" tabIndex={0}>
-                            <MaterialIcon iconName="settings_input_svideo"/>
-                            <span className="menu-title">سنگی بر گوری</span>
-                        </Link>
-                    </li>
+                    {
+                        sideLinks.map((sideLink: SideLink, index: number) => {
+                            if (sideLink.path && sideLink.icon) {
+                                return (
+                                    <li className="bold">
+                                        <Link className="waves-effect waves-cyan" to={sideLink.path} tabIndex={0}>
+                                            <MaterialIcon iconName={sideLink.icon}/>
+                                            <span className="menu-title">{sideLink.title}</span>
+                                        </Link>
+                                    </li>
+                                );
+                            } else {
+                                return (
+                                    <li className="navigation-header">
+                                        <span className="navigation-header-text">{sideLink.title}</span>
+                                    </li>
+                                );
+                            }
+                        })
+                    }
                 </ul>
             </aside>
         );

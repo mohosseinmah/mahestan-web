@@ -4,6 +4,7 @@ import {Route, Switch} from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import SangiBarGoori from "../pages/SangiBarGoori";
+import Courses from "../pages/Courses";
 
 class Main extends React.Component {
     render() {
@@ -11,8 +12,9 @@ class Main extends React.Component {
             <div id="main">
                 <Row>
                     <Switch>
-                        <Route exact path="/stone" component={SangiBarGoori}/>
-                        <Route exact path="/profile" component={Profile}/>
+                        <Route path="/stone" component={SangiBarGoori}/>
+                        <Route path="/profile" component={Profile}/>
+                        <Route path="/courses" component={Courses}/>
                         <Route path="/" component={Dashboard}/>
                     </Switch>
                 </Row>
