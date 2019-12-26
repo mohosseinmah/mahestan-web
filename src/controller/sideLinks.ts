@@ -7,7 +7,7 @@ export const sideLinks: SideLink[] = [
         icon: "dashboard"
     },
     {
-        title: "درس"
+        title: "ثبت نام"
     },
     {
         title: "لیست دروس",
