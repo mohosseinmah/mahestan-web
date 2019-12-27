@@ -8,6 +8,7 @@ import Col from "../components/Col";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
 import {findCourses} from "../../controller/backend/client";
+import ResponseEntity from "../../model/ResponseEntity";
 
 class Courses extends React.Component<any, any> {
     private columns: string[] = [
@@ -66,9 +67,11 @@ class Courses extends React.Component<any, any> {
         findCourses(this.setCourses)
     };
 
-    private setCourses = (courses: Course[]) => {
-        this.courses = courses;
-        this.forceUpdate();
+    private setCourses = (response: ResponseEntity) => {
+        if (response.status === 200) {
+            this.courses = response.body as Course[];
+            this.forceUpdate();
+        }
     };
 
     private clear = () => {
