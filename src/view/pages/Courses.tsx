@@ -33,17 +33,17 @@ class Courses extends React.Component<any, any> {
                     <Row>
                         <form>
                             <Col className="s3">
-                                <InputField id="daneshkadeh" type="number" className="inline" label="دانشکده درس"/>
+                                <InputField id="faculty" type="number" className="inline" label="دانشکده درس"/>
                             </Col>
                             <Col className="s3">
-                                <InputField id="gorouheamouzeshi" type="number" className="inline"
+                                <InputField id="department" type="number" className="inline"
                                             label="گروه آموزشی درس"/>
                             </Col>
                             <Col className="s3">
-                                <InputField id="shomare" type="number" className="inline" label="شماره درس"/>
+                                <InputField id="number" type="number" className="inline" label="شماره درس"/>
                             </Col>
                             <Col className="s3">
-                                <InputField id="gorouh" type="number" className="inline" label="گروه درس"/>
+                                <InputField id="group" type="number" className="inline" label="گروه درس"/>
                             </Col>
                         </form>
                         <Col className="s12 right-align">
@@ -58,7 +58,18 @@ class Courses extends React.Component<any, any> {
     }
 
     private findCourses = () => {
-        findCourses(this.setCourses);
+        const getInputValue = function (id: string): string {
+            const inputElement = document.getElementById(id) as HTMLInputElement;
+            if (inputElement) return inputElement.value;
+            return "";
+        };
+        const faculty: string = getInputValue("faculty");
+        const department: string = getInputValue("department");
+        const number: string = getInputValue("number");
+        const group: string = getInputValue("group");
+
+        findCourses(this.setCourses, faculty, department, number, group, 5, 1);
+
         this.result = (
             <>
                 <Divider/>
