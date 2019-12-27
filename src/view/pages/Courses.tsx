@@ -1,7 +1,6 @@
 import React from "react";
 import Breadcrumb from "../components/Breadcrumb";
 import Page from "../components/Page";
-import Table from "../components/Table";
 import Course from "../../model/Course";
 import Row from "../components/Row";
 import Col from "../components/Col";
@@ -9,6 +8,9 @@ import Button from "../components/Button";
 import InputField from "../components/InputField";
 import {findCourses} from "../../controller/backend/client";
 import ResponseEntity from "../../model/ResponseEntity";
+import Divider from "../components/Divider";
+import Preloader from "../components/Preloader";
+import Table from "../components/Table";
 
 class Courses extends React.Component<any, any> {
     private columns: string[] = [
@@ -21,7 +23,7 @@ class Courses extends React.Component<any, any> {
         "زمان و مکان ارائه",
         "زمان و مکان امتحان"
     ];
-    private courses: Course[] = [];
+    private result: any = null;
 
     render() {
         return (
@@ -49,33 +51,53 @@ class Courses extends React.Component<any, any> {
                             <Button className="mb-1 mr-1" onClick={this.findCourses}>مشاهده</Button>
                         </Col>
                     </Row>
-                    {
-                        this.courses.length > 0 &&
-                        (<>
-                            <br/>
-                            <Row>
-                                <Table bordered striped columns={this.columns} data={this.courses}/>
-                            </Row>
-                        </>)
-                    }
+                    {this.result}
                 </Page>
             </>
         );
     }
 
     private findCourses = () => {
-        findCourses(this.setCourses)
+        findCourses(this.setCourses);
+        this.result = (
+            <>
+                <Divider/>
+                <div className="center-align">
+                    <Preloader/>
+                </div>
+            </>
+        );
+        this.forceUpdate();
     };
 
     private setCourses = (response: ResponseEntity) => {
         if (response.status === 200) {
-            this.courses = response.body as Course[];
-            this.forceUpdate();
+            const courses = response.body as Course[];
+            this.result = (
+                <>
+                    <Divider/>
+                    <Row>
+                        <Table bordered striped columns={this.columns} data={courses}/>
+                    </Row>
+                </>
+            );
+        } else if (response.status === 404) {
+            this.result = (
+                <>
+                    <Divider/>
+                    <div className="center-align">
+                        <p style={{color: "red"}}>اطلاعاتی یافت نشد.</p>
+                    </div>
+                </>
+            );
+        } else {
+            this.result = null;
         }
+        this.forceUpdate();
     };
 
     private clear = () => {
-        this.courses = [];
+        this.result = null;
         this.forceUpdate();
     };
 }
