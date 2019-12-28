@@ -83,7 +83,7 @@ class Courses extends React.Component<any, any> {
 
     private setCourses = (response: ResponseEntity) => {
         if (response.status === 200) {
-            const courses = response.body as Course[];
+            const courses = response.body.content as Course[];
             this.result = (
                 <>
                     <Divider/>
