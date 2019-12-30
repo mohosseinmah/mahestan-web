@@ -9,7 +9,7 @@ import {selectedCourses} from "../../controller/enrollment";
 import CourseId from "../../model/CourseId";
 import Divider from "../components/Divider";
 import Table from "../components/Table";
-import {findEnrolledCourses} from "../../controller/backend/client";
+import {enrollCourses, findEnrolledCourses} from "../../controller/backend/client";
 import ResponseEntity from "../../model/ResponseEntity";
 import MaterialIcon from "../components/MaterialIcon";
 import Preloader from "../components/Preloader";
@@ -59,6 +59,7 @@ class Enrollment extends React.Component {
 
     private findCourses = () => {
         findEnrolledCourses(this.setCourses);
+        this.enrolledCoursesCount = 0;
         this.result = (
             <div className="center-align">
                 <Preloader/>
@@ -114,7 +115,15 @@ class Enrollment extends React.Component {
                 selectedCourseIds.push(`${courseId.faculty}${courseId.department}${courseId.number}${courseId.group}`);
             }
         }
-        alert(JSON.stringify(selectedCourseIds));
+        enrollCourses(this.afterEnroll, selectedCourseIds);
+    };
+
+    private afterEnroll = (response: ResponseEntity) => {
+        if (response.status === 204) {
+            selectedCourses.length = 0;
+            selectedCourses.push({});
+            this.findCourses();
+        }
     };
 }
 

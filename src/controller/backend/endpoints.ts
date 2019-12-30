@@ -11,3 +11,8 @@ export const studentEnrolledCoursesEndpoint: Endpoint = {
     method: "GET",
     url: `${hostUrl}/students/{student-id}/enrolled-courses`
 };
+
+export const enrollCourseEndpoint: Endpoint = {
+    method: "POST",
+    url: `${hostUrl}/students/{student-id}/enroll`
+};

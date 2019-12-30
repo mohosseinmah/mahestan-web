@@ -1,13 +1,13 @@
 import Endpoint from "../../model/Endpoint";
 
-export function call(endpoint: Endpoint, pathVariables: any | null, query: string | null, callback: Function) {
+export function call(endpoint: Endpoint, pathVariables: any | null, query: string | null, body: any | null, callback: Function) {
     const request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (this.readyState === 4) {
             callback(
                 {
                     status: this.status,
-                    body: JSON.parse(this.responseText)
+                    body: this.responseText ? JSON.parse(this.responseText) : ""
                 }
             );
         }
@@ -24,5 +24,9 @@ export function call(endpoint: Endpoint, pathVariables: any | null, query: strin
         url = `${url}?${query}`;
     }
     request.open(endpoint.method, url, true);
-    request.send();
+    if (body) {
+        request.send(JSON.stringify(body));
+    } else {
+        request.send();
+    }
 }
