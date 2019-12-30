@@ -1,8 +1,8 @@
-import User from "../model/User";
+import Student from "../model/Student";
 
-let loggedInUser: User | null;
+let loggedInUser: Student | null;
 
-export function authenticate(user: User) {
+export function authenticate(user: Student) {
     window.sessionStorage.setItem("user", JSON.stringify(user));
     loggedInUser = user;
 }

@@ -12,6 +12,7 @@ import Table from "../components/Table";
 import {findEnrolledCourses} from "../../controller/backend/client";
 import ResponseEntity from "../../model/ResponseEntity";
 import MaterialIcon from "../components/MaterialIcon";
+import Preloader from "../components/Preloader";
 
 class Enrollment extends React.Component {
     private columns: string[] = [
@@ -21,6 +22,7 @@ class Enrollment extends React.Component {
         ""
     ];
     private result: any = null;
+    private enrolledCoursesCount: number = 0;
 
     constructor(props: any) {
         super(props);
@@ -33,6 +35,9 @@ class Enrollment extends React.Component {
                 <Breadcrumb items={[{name: "انتخاب واحد"}]}/>
                 <Page>
                     <Row>
+                        <Col className="s4">حداقل تعداد واحد مجاز: 12</Col>
+                        <Col className="s4">حداکثر تعداد واحد مجاز: 20</Col>
+                        <Col className="s4">تعداد واحد اخذ شده:&nbsp;{this.enrolledCoursesCount}</Col>
                         {this.result}
                     </Row>
                     <Divider/>
@@ -54,18 +59,31 @@ class Enrollment extends React.Component {
 
     private findCourses = () => {
         findEnrolledCourses(this.setCourses);
+        this.result = (
+            <div className="center-align">
+                <Preloader/>
+            </div>
+        );
+        this.forceUpdate();
     };
 
     private setCourses = (response: ResponseEntity) => {
         if (response.status === 200) {
+            this.enrolledCoursesCount = this.countUnits(response.body);
             const data: any[] = this.addRemoveOption(response.body);
             this.result = (
-                <Col className="s12">
+                <Col className="s12 mt-2">
                     <Table columns={this.columns} data={data}/>
                 </Col>
             );
             this.forceUpdate();
         }
+    };
+
+    private countUnits = (courses: any[]) => {
+        let units = 0;
+        for (let course of courses) units += course.unit;
+        return units;
     };
 
     private addRemoveOption = (courses: any[]) => {
@@ -90,7 +108,13 @@ class Enrollment extends React.Component {
     };
 
     private handleSubmit = () => {
-        alert(JSON.stringify(selectedCourses));
+        const selectedCourseIds: string[] = [];
+        for (let courseId of selectedCourses) {
+            if (courseId.faculty && courseId.department && courseId.number && courseId.group) {
+                selectedCourseIds.push(`${courseId.faculty}${courseId.department}${courseId.number}${courseId.group}`);
+            }
+        }
+        alert(JSON.stringify(selectedCourseIds));
     };
 }
 

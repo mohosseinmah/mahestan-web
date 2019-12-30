@@ -77,7 +77,7 @@ class Login extends React.Component {
             const username: string = getInputValue(usernameElement);
             const password: string = getInputValue(passwordElement);
             if (username && password) {
-                authenticate({username: username, password: password});
+                authenticate({id: username, password: password});
                 this.forceUpdate();
             }
         }
