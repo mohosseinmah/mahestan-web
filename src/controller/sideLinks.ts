@@ -15,6 +15,11 @@ export const sideLinks: SideLink[] = [
         icon: "view_list"
     },
     {
+        title: "انتخاب واحد",
+        path: "/enrollment",
+        icon: "assignment_turned_in"
+    },
+    {
         title: "سایر"
     },
     {

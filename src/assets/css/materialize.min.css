@@ -2720,7 +2720,7 @@ tr {
 
 td, th {
     display: table-cell;
-    padding: 15px 5px;
+    padding: 5px 5px;
     /*text-align: right;*/
     vertical-align: middle;
     border-radius: 2px

@@ -13,7 +13,7 @@ class Table extends React.Component<TableProps, any> {
         return (
             <table className={this.getClassName()}>
                 <thead>
-                <tr>
+                <tr style={{textAlign: this.props.bordered ? "center" : "right"}}>
                     {
                         this.props.columns.map((column: string, index: number) => {
                             return <th>{column}</th>;
