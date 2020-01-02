@@ -110,7 +110,7 @@ select {
     }
 
     #main {
-        padding-right: 250px
+        padding-right: 200px
     }
 
     #main.main-full {
@@ -4758,7 +4758,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field input.search-box-sm:no
     position: fixed;
     z-index: 999;
     top: 0;
-    width: 250px;
+    width: 200px;
     height: 100%;
     -webkit-transition: .3s ease all;
     transition: .3s ease all

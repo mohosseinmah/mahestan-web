@@ -20,11 +20,13 @@ export const sideLinks: SideLink[] = [
         icon: "assignment_turned_in"
     },
     {
-        title: "سایر"
+        title: "برنامه هفتگی",
+        path: "/schedule",
+        icon: "schedule"
     },
     {
-        title: "سنگی بر گوری",
-        path: "/stone",
-        icon: "book"
+        title: "برنامه امتحان",
+        path: "/exams",
+        icon: "calendar_today"
     }
 ];

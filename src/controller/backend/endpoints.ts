@@ -21,3 +21,8 @@ export const removeCourseEndpoint: Endpoint = {
     method: "DELETE",
     url: `${hostUrl}/students/{student-id}/enroll`
 };
+
+export const studentScheduleEndpoint: Endpoint = {
+    method: "GET",
+    url: `${hostUrl}/students/{student-id}/schedule`
+};

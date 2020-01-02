@@ -1,10 +1,16 @@
-import React from "react";
+import React, {CSSProperties} from "react";
 
-class Col extends React.Component<any, any> {
+interface ColProps {
+    className: string;
+    style?: CSSProperties;
+}
+
+class Col extends React.Component<ColProps> {
 
     render() {
-        const classNames = ["col", this.props.className].join(" ");
-        return <div className={classNames}>{this.props.children}</div>;
+        const {className, ...props} = this.props;
+        const classNames = ["col", className].join(" ");
+        return <div className={classNames} {...props}>{this.props.children}</div>;
     }
 }
 

@@ -1,5 +1,11 @@
 import {call} from "./caller";
-import {coursesEndpoint, enrollCourseEndpoint, removeCourseEndpoint, studentEnrolledCoursesEndpoint} from "./endpoints";
+import {
+    coursesEndpoint,
+    enrollCourseEndpoint,
+    removeCourseEndpoint,
+    studentEnrolledCoursesEndpoint,
+    studentScheduleEndpoint
+} from "./endpoints";
 
 export function findCourses(setCourses: Function, faculty: string, department: string, number: string, group: string, size: number, page: number) {
     const queryParameters = [];
@@ -22,6 +28,10 @@ export function enrollCourses(callback: Function, courseIds: string[]) {
 
 export function removeCourse(callback: Function, courseId: string) {
     call(removeCourseEndpoint, getStudentIdPathVariable(), null, courseId, callback);
+}
+
+export function findSchedule(callback: Function) {
+    call(studentScheduleEndpoint, getStudentIdPathVariable(), null, null, callback);
 }
 
 function getStudentIdPathVariable() {
