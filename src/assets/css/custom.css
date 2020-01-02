@@ -9,3 +9,15 @@ NOTE:
 ------
 PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.schedule-row {
+    border-top: 0.5px solid;
+    border-bottom: 0.5px solid;
+}
+
+.schedule-column {
+    border-right: 0.5px solid;
+    border-left: 0.5px solid;
+    height: 70px;
+    overflow: hidden;
+}
