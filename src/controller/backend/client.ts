@@ -3,7 +3,7 @@ import {
     coursesEndpoint,
     enrollCourseEndpoint,
     removeCourseEndpoint,
-    studentEnrolledCoursesEndpoint,
+    studentEnrolledCoursesEndpoint, studentExamsEndpoint,
     studentScheduleEndpoint
 } from "./endpoints";
 
@@ -32,6 +32,10 @@ export function removeCourse(callback: Function, courseId: string) {
 
 export function findSchedule(callback: Function) {
     call(studentScheduleEndpoint, getStudentIdPathVariable(), null, null, callback);
+}
+
+export function findExams(callback: Function) {
+    call(studentExamsEndpoint, getStudentIdPathVariable(), null, null, callback);
 }
 
 function getStudentIdPathVariable() {

@@ -26,3 +26,8 @@ export const studentScheduleEndpoint: Endpoint = {
     method: "GET",
     url: `${hostUrl}/students/{student-id}/schedule`
 };
+
+export const studentExamsEndpoint: Endpoint = {
+    method: "GET",
+    url: `${hostUrl}/students/{student-id}/exams`
+};

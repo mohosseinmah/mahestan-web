@@ -6,6 +6,7 @@ import Profile from "../pages/Profile";
 import Courses from "../pages/Courses";
 import Enrollment from "../pages/Enrollment";
 import Schedule from "../pages/Schedule";
+import Exams from "../pages/Exams";
 
 class Main extends React.Component {
     render() {
@@ -17,6 +18,7 @@ class Main extends React.Component {
                         <Route path="/courses" component={Courses}/>
                         <Route path="/enrollment" component={Enrollment}/>
                         <Route path="/schedule" component={Schedule}/>
+                        <Route path="/exams" component={Exams}/>
                         <Route path="/" component={Dashboard}/>
                     </Switch>
                 </Row>
