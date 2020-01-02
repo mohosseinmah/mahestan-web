@@ -16,3 +16,8 @@ export const enrollCourseEndpoint: Endpoint = {
     method: "POST",
     url: `${hostUrl}/students/{student-id}/enroll`
 };
+
+export const removeCourseEndpoint: Endpoint = {
+    method: "DELETE",
+    url: `${hostUrl}/students/{student-id}/enroll`
+};

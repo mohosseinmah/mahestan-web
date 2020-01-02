@@ -9,7 +9,7 @@ import {selectedCourses} from "../../controller/enrollment";
 import CourseId from "../../model/CourseId";
 import Divider from "../components/Divider";
 import Table from "../components/Table";
-import {enrollCourses, findEnrolledCourses} from "../../controller/backend/client";
+import {enrollCourses, findEnrolledCourses, removeCourse} from "../../controller/backend/client";
 import ResponseEntity from "../../model/ResponseEntity";
 import MaterialIcon from "../components/MaterialIcon";
 import Preloader from "../components/Preloader";
@@ -92,15 +92,11 @@ class Enrollment extends React.Component {
             course.remove = (
                 <div style={{textAlign: "left"}}>
                     <MaterialIcon className="cursor-pointer" iconName="remove_circle"
-                                  onClick={this.remove.bind(this, course.id)}/>
+                                  onClick={this.handleRemove.bind(this, course.id)}/>
                 </div>
             );
         }
         return courses;
-    };
-
-    private remove = (id: number) => {
-        alert(`remove ${id}`);
     };
 
     private handleAdd = () => {
@@ -116,6 +112,10 @@ class Enrollment extends React.Component {
             }
         }
         enrollCourses(this.afterEnroll, selectedCourseIds);
+    };
+
+    private handleRemove = (id: number) => {
+        removeCourse(this.afterEnroll, `${id}`);
     };
 
     private afterEnroll = (response: ResponseEntity) => {
