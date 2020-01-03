@@ -12,19 +12,19 @@ export const coursesEndpoint: Endpoint = {
     url: `${hostUrl}/courses`
 };
 
-export const studentEnrolledCoursesEndpoint: Endpoint = {
+export const studentCoursesEndpoint: Endpoint = {
     method: "GET",
-    url: `${hostUrl}/students/{student-id}/enrolled-courses`
+    url: `${hostUrl}/students/{student-id}/courses`
 };
 
 export const enrollCourseEndpoint: Endpoint = {
     method: "POST",
-    url: `${hostUrl}/students/{student-id}/enroll`
+    url: `${hostUrl}/students/{student-id}/courses`
 };
 
 export const removeCourseEndpoint: Endpoint = {
     method: "DELETE",
-    url: `${hostUrl}/students/{student-id}/enroll`
+    url: `${hostUrl}/students/{student-id}/courses/{course-id}`
 };
 
 export const studentScheduleEndpoint: Endpoint = {

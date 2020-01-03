@@ -4,16 +4,17 @@ import {
     enrollCourseEndpoint,
     loginEndpoint,
     removeCourseEndpoint,
-    studentEnrolledCoursesEndpoint,
+    studentCoursesEndpoint,
     studentExamsEndpoint,
     studentScheduleEndpoint
 } from "./endpoints";
+import {getCurrentUser} from "../authentication";
 
-export function login(afterLogin: Function, id: string, password: string) {
-    call(loginEndpoint, null, null, {id: id, password: password}, afterLogin);
+export function login(callback: Function, id: string, password: string) {
+    call(loginEndpoint, null, null, {id: id, password: password}, callback);
 }
 
-export function findCourses(setCourses: Function, faculty: string, department: string, number: string, group: string, size: number, page: number) {
+export function findCourses(callback: Function, faculty: string, department: string, number: string, group: string, size: number, page: number) {
     const queryParameters = [];
     if (faculty) queryParameters.push(`faculty=${faculty}`);
     if (department) queryParameters.push(`department=${department}`);
@@ -21,11 +22,11 @@ export function findCourses(setCourses: Function, faculty: string, department: s
     if (group) queryParameters.push(`group=${department}`);
     if (size) queryParameters.push(`size=${size}`);
     if (page) queryParameters.push(`page=${page}`);
-    call(coursesEndpoint, null, queryParameters.join("&"), null, setCourses);
+    call(coursesEndpoint, null, queryParameters.join("&"), null, callback);
 }
 
-export function findEnrolledCourses(setCourses: Function) {
-    call(studentEnrolledCoursesEndpoint, getStudentIdPathVariable(), null, null, setCourses);
+export function findEnrolledCourses(callback: Function) {
+    call(studentCoursesEndpoint, getStudentIdPathVariable(), null, null, callback);
 }
 
 export function enrollCourses(callback: Function, courseIds: string[]) {
@@ -33,7 +34,9 @@ export function enrollCourses(callback: Function, courseIds: string[]) {
 }
 
 export function removeCourse(callback: Function, courseId: string) {
-    call(removeCourseEndpoint, getStudentIdPathVariable(), null, courseId, callback);
+    const pathVariables: any = getStudentIdPathVariable();
+    pathVariables["course-id"] = courseId;
+    call(removeCourseEndpoint, pathVariables, null, null, callback);
 }
 
 export function findSchedule(callback: Function) {
@@ -45,9 +48,5 @@ export function findExams(callback: Function) {
 }
 
 function getStudentIdPathVariable() {
-    // let pathVariables = null;
-    // const currentUser = getCurrentUser();
-    // if (currentUser !== null) pathVariables = {"student-id": currentUser.id};
-    // return pathVariables;
-    return {"student-id": "952013038"};
+    return {"student-id": getCurrentUser().id};
 }
