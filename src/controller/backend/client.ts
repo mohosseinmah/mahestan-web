@@ -2,10 +2,16 @@ import {call} from "./caller";
 import {
     coursesEndpoint,
     enrollCourseEndpoint,
+    loginEndpoint,
     removeCourseEndpoint,
-    studentEnrolledCoursesEndpoint, studentExamsEndpoint,
+    studentEnrolledCoursesEndpoint,
+    studentExamsEndpoint,
     studentScheduleEndpoint
 } from "./endpoints";
+
+export function login(afterLogin: Function, id: string, password: string) {
+    call(loginEndpoint, null, null, {id: id, password: password}, afterLogin);
+}
 
 export function findCourses(setCourses: Function, faculty: string, department: string, number: string, group: string, size: number, page: number) {
     const queryParameters = [];

@@ -13,8 +13,16 @@ import Button from "../components/Button";
 import {authenticate, isAuthenticated} from "../../controller/authentication";
 import {Redirect} from "react-router-dom";
 import InputField from "../components/InputField";
+import ResponseEntity from "../../model/ResponseEntity";
+import {login} from "../../controller/backend/client";
 
-class Login extends React.Component {
+class Login extends React.Component<any, any> {
+    
+    constructor(props: any) {
+        super(props);
+        this.state = {error: undefined};
+    }
+
     render() {
         if (isAuthenticated()) {
             return <Redirect to="/"/>
@@ -33,6 +41,7 @@ class Login extends React.Component {
                                                 <h5 className="ml-4">ورود به حساب کاربری</h5>
                                             </Col>
                                         </Row>
+                                        {this.state.error}
                                         <Row className="margin">
                                             <Col className="s12">
                                                 <InputField id="username" type="text" label="نام کاربری">
@@ -69,6 +78,7 @@ class Login extends React.Component {
     }
 
     private login = () => {
+        this.setState({error: undefined});
         const getInputElement = (id: string) => document.getElementById(id) as HTMLInputElement;
         const usernameElement = getInputElement("username");
         const passwordElement = getInputElement("password");
@@ -77,9 +87,33 @@ class Login extends React.Component {
             const username: string = getInputValue(usernameElement);
             const password: string = getInputValue(passwordElement);
             if (username && password) {
-                authenticate({id: username, password: password});
-                this.forceUpdate();
+                login(this.afterLogin, username, password);
+            } else {
+                this.setState({
+                    error:
+                        <Row>
+                            <Col className="s12">
+                                <p className="red-text">لطفا نام کاربری و کلمه عبور خود را وارد کنید.</p>
+                            </Col>
+                        </Row>
+                });
             }
+        }
+    };
+
+    private afterLogin = (response: ResponseEntity) => {
+        if (response.status === 200) {
+            authenticate(response.body);
+            this.forceUpdate();
+        } else {
+            this.setState({
+                error:
+                    <Row>
+                        <Col className="s12">
+                            <p className="red-text">نام کاربری یا کلمه عبور صحیح نمی باشد.</p>
+                        </Col>
+                    </Row>
+            });
         }
     };
 }

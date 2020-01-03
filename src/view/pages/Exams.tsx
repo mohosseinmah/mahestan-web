@@ -12,7 +12,7 @@ class Exams extends React.Component {
     private columns = [
         "شماره درس",
         "نام درس",
-        "نام استاد",
+        "استاد",
         "تاریخ و ساعت"
     ];
     private result: any = undefined;

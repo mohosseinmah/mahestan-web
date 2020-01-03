@@ -1,6 +1,6 @@
 import Student from "../model/Student";
 
-let loggedInUser: Student | null;
+let loggedInUser: Student;
 
 export function authenticate(user: Student) {
     window.sessionStorage.setItem("user", JSON.stringify(user));
@@ -9,7 +9,7 @@ export function authenticate(user: Student) {
 
 export function logout() {
     window.sessionStorage.removeItem("user");
-    loggedInUser = null;
+    loggedInUser = {field: "", firstName: "", id: "", lastName: "", password: ""};
 }
 
 export function getCurrentUser() {
