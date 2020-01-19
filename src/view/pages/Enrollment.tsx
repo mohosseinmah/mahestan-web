@@ -130,13 +130,21 @@ class Enrollment extends React.Component {
 
     private afterEnroll = (response: ResponseEntity) => {
         if (response.status === 204) {
-            selectedCourses.length = 0;
-            selectedCourses.push({});
+            this.clearNumberInputs();
             this.findCourses();
         } else {
-            this.error = <p className="red-text mb-1">خطایی رخ داده است.</p>;
+            this.error = <p className="red-text mb-1">درس انتخابی دارای تداخل می باشد.</p>;
+            this.clearNumberInputs();
             this.forceUpdate();
         }
+    };
+
+    private clearNumberInputs = () => {
+        selectedCourses.length = 0;
+        selectedCourses.push({});
+        document.querySelectorAll(".number-input").forEach((element: Element) => {
+            (element as HTMLInputElement).value = "";
+        });
     };
 }
 

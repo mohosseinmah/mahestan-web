@@ -18,7 +18,7 @@ class NumberInput extends React.Component<NumberInputProps> {
 
     render() {
         const value = (selectedCourses[this.props.index])[this.props.property];
-        return <input type="text" value={value} style={this.inputStyle} onChange={this.handleChange}/>;
+        return <input className="number-input" type="text" value={value} style={this.inputStyle} onChange={this.handleChange}/>;
     }
 
     private handleChange = (e: any) => {
