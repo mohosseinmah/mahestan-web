@@ -23,6 +23,7 @@ class Enrollment extends React.Component {
     ];
     private result: any = null;
     private enrolledCoursesCount: number = 0;
+    private error: any = null;
 
     constructor(props: any) {
         super(props);
@@ -43,6 +44,7 @@ class Enrollment extends React.Component {
                     <Divider/>
                     <Row>
                         <Col className="s12">
+                            {this.error}
                             {selectedCourses.map((courseId: CourseId, index: number) => {
                                 return (
                                     <CourseIdInput index={index} courseId={courseId}/>
@@ -77,8 +79,10 @@ class Enrollment extends React.Component {
                     <Table columns={this.columns} data={data}/>
                 </Col>
             );
-            this.forceUpdate();
+        } else {
+            this.result = undefined;
         }
+        this.forceUpdate();
     };
 
     private countUnits = (courses: any[]) => {
@@ -109,9 +113,15 @@ class Enrollment extends React.Component {
         for (let courseId of selectedCourses) {
             if (courseId.faculty && courseId.department && courseId.number && courseId.group) {
                 selectedCourseIds.push(`${courseId.faculty}${courseId.department}${courseId.number}${courseId.group}`);
+            } else if (selectedCourseIds.length === 0) {
+                this.error = <p className="red-text mb-1">لطفا اطلاعات را کامل وارد کنید.</p>;
+                this.forceUpdate();
+                return;
             }
         }
         enrollCourses(this.afterEnroll, selectedCourseIds);
+        this.error = null;
+        this.forceUpdate();
     };
 
     private handleRemove = (id: number) => {
@@ -123,6 +133,9 @@ class Enrollment extends React.Component {
             selectedCourses.length = 0;
             selectedCourses.push({});
             this.findCourses();
+        } else {
+            this.error = <p className="red-text mb-1">خطایی رخ داده است.</p>;
+            this.forceUpdate();
         }
     };
 }

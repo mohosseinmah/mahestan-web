@@ -25,6 +25,7 @@ export function call(endpoint: Endpoint, pathVariables: any | null, query: strin
     }
     request.open(endpoint.method, url, true);
     if (body) {
+        request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify(body));
     } else {
         request.send();

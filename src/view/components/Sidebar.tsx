@@ -50,18 +50,22 @@ class Sidebar extends React.Component {
     }
 
     private handleClick = (e: any) => {
-        const elements = document.getElementsByClassName("waves-effect waves-cyan");
-        let element;
-        for (let i = 0; i < elements.length; i++) {
-            element = elements.item(i) as HTMLElement;
-            element.className = element.className.replace(" active", "");
-        }
+        this.inactiveSidelinks();
 
         let targetElement = e.target;
         while (targetElement.localName !== "a") {
             targetElement = targetElement.parentElement;
         }
         targetElement.className = targetElement.className + " active";
+    };
+
+    private inactiveSidelinks = () => {
+        const elements = document.getElementsByClassName("waves-effect waves-cyan");
+        let element;
+        for (let i = 0; i < elements.length; i++) {
+            element = elements.item(i) as HTMLElement;
+            element.className = element.className.replace(" active", "");
+        }
     };
 }
 

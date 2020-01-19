@@ -11,6 +11,7 @@ import ResponseEntity from "../../model/ResponseEntity";
 import Divider from "../components/Divider";
 import Preloader from "../components/Preloader";
 import Table from "../components/Table";
+import Pagination from "../components/Pagination";
 
 class Courses extends React.Component<any, any> {
     private columns: string[] = [
@@ -48,7 +49,7 @@ class Courses extends React.Component<any, any> {
                         </form>
                         <Col className="s12 right-align">
                             <Button className="red mb-1 mr-1" onClick={this.clear}>پاک کردن</Button>
-                            <Button className="mb-1 mr-1" onClick={this.findCourses}>مشاهده</Button>
+                            <Button className="mb-1 mr-1" onClick={this.findCourses.bind(this, 1)}>مشاهده</Button>
                         </Col>
                     </Row>
                     {this.result}
@@ -57,7 +58,7 @@ class Courses extends React.Component<any, any> {
         );
     }
 
-    private findCourses = () => {
+    private findCourses = (page: number) => {
         const getInputValue = function (id: string): string {
             const inputElement = document.getElementById(id) as HTMLInputElement;
             if (inputElement) return inputElement.value;
@@ -68,7 +69,7 @@ class Courses extends React.Component<any, any> {
         const number: string = getInputValue("number");
         const group: string = getInputValue("group");
 
-        findCourses(this.setCourses, faculty, department, number, group, 5, 1);
+        findCourses(this.setCourses, faculty, department, number, group, 5, page);
 
         this.result = (
             <>
@@ -89,6 +90,9 @@ class Courses extends React.Component<any, any> {
                     <Divider/>
                     <Row>
                         <Table bordered striped columns={this.columns} data={courses}/>
+                        <Col className="s12 mt-2">
+                            <Pagination size={response.body.totalPages} page={response.body.currentPage} callback={this.findCourses}/>
+                        </Col>
                     </Row>
                 </>
             );

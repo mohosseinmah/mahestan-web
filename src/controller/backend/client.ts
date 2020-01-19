@@ -18,8 +18,8 @@ export function findCourses(callback: Function, faculty: string, department: str
     const queryParameters = [];
     if (faculty) queryParameters.push(`faculty=${faculty}`);
     if (department) queryParameters.push(`department=${department}`);
-    if (number) queryParameters.push(`number=${department}`);
-    if (group) queryParameters.push(`group=${department}`);
+    if (number) queryParameters.push(`number=${number}`);
+    if (group) queryParameters.push(`group=${group}`);
     if (size) queryParameters.push(`size=${size}`);
     if (page) queryParameters.push(`page=${page}`);
     call(coursesEndpoint, null, queryParameters.join("&"), null, callback);
