@@ -126,14 +126,20 @@ class Enrollment extends React.Component {
 
     private handleRemove = (id: number) => {
         removeCourse(this.afterEnroll, `${id}`);
+        this.error = null;
+        this.forceUpdate();
     };
 
     private afterEnroll = (response: ResponseEntity) => {
         if (response.status === 204) {
             this.clearNumberInputs();
             this.findCourses();
-        } else {
-            this.error = <p className="red-text mb-1">درس انتخابی دارای تداخل می باشد.</p>;
+        } else if (response.status === 400) {
+            const errorMessages: any[] = [];
+            for (let errorMessage of response.body.errorMessages) {
+                errorMessages.push(<p className="red-text mb-1">{errorMessage}</p>);
+            }
+            this.error = errorMessages;
             this.clearNumberInputs();
             this.forceUpdate();
         }
