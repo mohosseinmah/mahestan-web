@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import MaterialIcon from "./MaterialIcon";
 import {sideLinks} from "../../controller/sideLinks";
 import SideLink from "../../model/SideLink";
+import {updateSideLinks} from "../../controller/sideLinksUpdater";
 
 class Sidebar extends React.Component {
     render() {
@@ -23,7 +24,7 @@ class Sidebar extends React.Component {
                         sideLinks.map((sideLink: SideLink, index: number) => {
                             if (sideLink.path && sideLink.icon) {
                                 return (
-                                    <li className="bold" onClick={this.handleClick}>
+                                    <li className="bold">
                                         <Link className="waves-effect waves-cyan" to={sideLink.path} tabIndex={0}>
                                             <MaterialIcon iconName={sideLink.icon}/>
                                             <span className="menu-title">{sideLink.title}</span>
@@ -45,28 +46,8 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount(): void {
-        const firstElement = document.getElementsByClassName("waves-effect waves-cyan").item(0) as HTMLElement;
-        firstElement.className += " active";
+        updateSideLinks();
     }
-
-    private handleClick = (e: any) => {
-        this.inactiveSidelinks();
-
-        let targetElement = e.target;
-        while (targetElement.localName !== "a") {
-            targetElement = targetElement.parentElement;
-        }
-        targetElement.className = targetElement.className + " active";
-    };
-
-    private inactiveSidelinks = () => {
-        const elements = document.getElementsByClassName("waves-effect waves-cyan");
-        let element;
-        for (let i = 0; i < elements.length; i++) {
-            element = elements.item(i) as HTMLElement;
-            element.className = element.className.replace(" active", "");
-        }
-    };
 }
 
 export default Sidebar;

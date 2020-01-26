@@ -3,8 +3,15 @@ import Container from "./Container";
 import Section from "./Section";
 import Card from "./Card";
 import Col from "./Col";
+import {updateSideLinks} from "../../controller/sideLinksUpdater";
 
 class Page extends React.Component {
+
+    constructor(props: any) {
+        super(props);
+        updateSideLinks();
+    }
+
     render() {
         return (
             <Col className="s12">

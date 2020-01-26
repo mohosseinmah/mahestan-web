@@ -34,7 +34,7 @@ class Header extends React.Component {
                                     <ul className="dropdown-content" id="profile-dropdown" tabIndex={0}
                                         style={profileDropdownStyle}>
                                         <li tabIndex={0}>
-                                            <Link className="grey-text text-darken-1" to="/profile">
+                                            <Link className="grey-text text-darken-1" to="/profile" onClick={this.hide}>
                                                 <MaterialIcon iconName="person_outline"/>&nbsp;پروفایل
                                             </Link>
                                         </li>
@@ -73,6 +73,13 @@ class Header extends React.Component {
                 profileDropdown.style.display = "block";
             }
         }
+    };
+
+    private hide = () => {
+        const navbarProfile = document.querySelector(".navbar-list>li");
+        if (navbarProfile) navbarProfile.className = "";
+        const profileDropdown = document.getElementById("profile-dropdown");
+        if (profileDropdown) profileDropdown.style.display = "none";
     };
 
     private handleLogout = () => {
