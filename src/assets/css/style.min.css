@@ -954,15 +954,23 @@ a {
     text-decoration: none
 }
 
+@font-face {
+    font-family: "yekan";
+    src: url(../fonts/Yekan.eot);
+    src: url(../fonts/Yekan.eot?#iefix) format("embedded-opentype"), url(../fonts/Yekan.woff) format("woff"), url(../fonts/Yekan.ttf) format("truetype"), url(../fonts/Yekan.svg#BYekan) format("svg");
+    font-weight: normal;
+    font-style: normal
+}
+
 html {
-    font-family: "B Yekan" !important;
+    font-family: yekan !important;
     font-weight: 400;
     line-height: 1.5;
     color: #6b6f82
 }
 
 h1, h2, h3, h4, h5, h6, p {
-    font-family: "B Yekan"
+    font-family: yekan
 }
 
 @media only screen and (min-width: 0) {
